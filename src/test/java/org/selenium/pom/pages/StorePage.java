@@ -15,20 +15,24 @@ public class StorePage extends BasePage {
         super(driver);
     }
 
+    public Boolean isLoaded(){
+        return waitForUrlToContain("/store");
+    }
+
     private StorePage enterTxtInSearchFld(String searchTxt){
-        driver.findElement(searchFld).sendKeys(searchTxt);
+        waitForElementToBeVisible(searchFld).sendKeys(searchTxt);
         return this;
     }
 
     private StorePage clickSearchBtn(){
-        driver.findElement(searchBtn).click();
+        waitForElementToBeClickable(searchBtn).click();
         return this;
     }
 
     /**
      * Functional vs Structural page object (method)
-     * @param searchTxt
-     * @return
+     * @param searchTxt - search item
+     * @return StorePage
      */
     public StorePage search(String searchTxt){
         return enterTxtInSearchFld(searchTxt).
@@ -36,13 +40,13 @@ public class StorePage extends BasePage {
     }
 
     public String getTitle(){
-        return driver.findElement(title).getText();
+        return waitForElementToBeVisible(title).getText();
     }
 
     /**
      * Handle dynamically generated UI elements
-     * @param productName
-     * @return
+     * @param productName - product name to add
+     * @return By
      */
     private By getAddToCartBtnElement(String productName){
         return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
@@ -50,12 +54,23 @@ public class StorePage extends BasePage {
 
     public StorePage clickAddToCartBtn(String productName){
         By addToCartBtn = getAddToCartBtnElement(productName);
-        driver.findElement(addToCartBtn).click();
+        waitForElementToBeClickable(addToCartBtn).click();
         return this;
     }
 
     public CartPage clickViewCartLnk(){
-        driver.findElement(viewCartLnk).click();
+        waitForElementToBeClickable(viewCartLnk).click();
         return new CartPage(driver);
+    }
+
+    /**
+     * Add product to cart - (Functional vs Structural methods on POM)
+     *
+     * @param productName - product name to add
+     * @return CartPage
+     */
+    public CartPage addToCart(String productName){
+        return clickAddToCartBtn(productName).
+                clickViewCartLnk();
     }
 }

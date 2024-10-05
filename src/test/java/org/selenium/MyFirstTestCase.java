@@ -18,7 +18,7 @@ import java.io.InputStream;
 public class MyFirstTestCase extends BaseTest {
 
     @Test
-    public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
+    public void guestCheckoutUsingDirectBankTransfer() throws IOException {
         // extract billing address and product test data from json
         BillingAddress billingAddress = JacksonUtils.deserialize("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
@@ -26,29 +26,23 @@ public class MyFirstTestCase extends BaseTest {
         // use variables
         String searchTxt = "Blue";
 
+        // using the Builder pattern
         StorePage storePage = new HomePage(driver).
                 load().
-                goToStoreUsingMenu().
-                search(searchTxt);
+                goToStoreUsingMenu();
+        storePage.isLoaded();
+        storePage.search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
-
-        // TODO add functional method to add product to cart (clickAddToCartBtn,clickViewCartLnk)
-        //  after handling synchronization
-        storePage.clickAddToCartBtn(product.getName());
-        Thread.sleep(5000);
-        CartPage cartPage = storePage.clickViewCartLnk();
+        CartPage cartPage = storePage.addToCart(product.getName());
+        cartPage.isLoaded();
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
         // using the Builder pattern
         CheckoutPage checkoutPage = cartPage.
                 checkout().
-                enterBillingAddress(billingAddress);
-
-        Thread.sleep(5000);
-                checkoutPage.placeOrder();
-
-        Thread.sleep(5000);
+                enterBillingAddress(billingAddress).
+                placeOrder();
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
     }
 
@@ -65,32 +59,22 @@ public class MyFirstTestCase extends BaseTest {
         // use variables
         String searchTxt = "Blue";
 
+        // using the Builder pattern
         StorePage storePage = new HomePage(driver).
                 load().
                 goToStoreUsingMenu().
                 search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
-        // TODO add functional method to add product to cart (clickAddToCartBtn,clickViewCartLnk)
-        //  after handling synchronization
-        storePage.clickAddToCartBtn(product.getName());
-        Thread.sleep(5000);
-        CartPage cartPage = storePage.clickViewCartLnk();
+        CartPage cartPage = storePage.addToCart(product.getName());
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
-        CheckoutPage checkoutPage = cartPage.checkout();
-        checkoutPage.clickHereToLogin();
-
-        Thread.sleep(5000);
-        checkoutPage.login(user);
-
-        checkoutPage.
-                enterBillingAddress(billingAddress);
-
-        Thread.sleep(5000);
-        checkoutPage.placeOrder();
-
-        Thread.sleep(5000);
+        // using the Builder pattern
+        CheckoutPage checkoutPage = cartPage.
+                checkout().
+                clickHereToLogin().
+                login(user).
+                enterBillingAddress(billingAddress).placeOrder();
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
     }
 }

@@ -3,6 +3,8 @@ package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.User;
@@ -20,6 +22,7 @@ public class CheckoutPage extends BasePage {
     private final By usernameFld = By.id("username");
     private final By passwordFld = By.id("password");
     private final By loginBtn = By.name("login");
+    private final By overlay = By.cssSelector(".blockOverlay");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -30,42 +33,48 @@ public class CheckoutPage extends BasePage {
      * Note we are getting rid or handling some of the user state dependency
      * by clearing text fields before filling them for registered users
      *
-     * @param firstName
-     * @return
+     * @param firstName - billing address first name
+     * @return CheckoutPage
      */
     public CheckoutPage enterFirstName(String firstName) {
-        driver.findElement(billingFirstNameFld).clear();
-        driver.findElement(billingFirstNameFld).sendKeys(firstName);
+        WebElement element = waitForElementToBeVisible(billingFirstNameFld);
+        element.clear();
+        element.sendKeys(firstName);
         return this;
     }
 
     public CheckoutPage enterLastName(String lastName) {
-        driver.findElement(billingLastNameFld).clear();
-        driver.findElement(billingLastNameFld).sendKeys(lastName);
+        WebElement element = waitForElementToBeVisible(billingLastNameFld);
+        element.clear();
+        element.sendKeys(lastName);
         return this;
     }
 
     public CheckoutPage enterAddressOne(String addressOne) {
-        driver.findElement(billingAddressOneFld).clear();
-        driver.findElement(billingAddressOneFld).sendKeys(addressOne);
+        WebElement element = waitForElementToBeVisible(billingAddressOneFld);
+        element.clear();
+        element.sendKeys(addressOne);
         return this;
     }
 
     public CheckoutPage enterCity(String city) {
-        driver.findElement(billingCityFld).clear();
-        driver.findElement(billingCityFld).sendKeys(city);
+        WebElement element = waitForElementToBeVisible(billingCityFld);
+        element.clear();
+        element.sendKeys(city);
         return this;
     }
 
     public CheckoutPage enterPostCode(String postCode) {
-        driver.findElement(billingPostCodeFld).clear();
-        driver.findElement(billingPostCodeFld).sendKeys(postCode);
+        WebElement element = waitForElementToBeVisible(billingPostCodeFld);
+        element.clear();
+        element.sendKeys(postCode);
         return this;
     }
 
     public CheckoutPage enterEmail(String email) {
-        driver.findElement(billingEmailFld).clear();
-        driver.findElement(billingEmailFld).sendKeys(email);
+        WebElement element = waitForElementToBeVisible(billingEmailFld);
+        element.clear();
+        element.sendKeys(email);
         return this;
     }
 
@@ -80,39 +89,41 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage placeOrder() {
-        driver.findElement(placeOrderBtn).click();
+        waitForOverlayToDisappear(overlay);
+        waitForElementToBeClickable(placeOrderBtn)
+                .click();
         return this;
     }
 
     public String getNotice() {
-        return driver.findElement(successNotice).getText();
+        return waitForElementToBeVisible(successNotice).getText();
     }
 
     public CheckoutPage clickHereToLogin() {
-        driver.findElement(clickHereToLoginLnk).click();
+        waitForElementToBeClickable(clickHereToLoginLnk).click();
         return this;
     }
 
     public CheckoutPage enterUsername(String username) {
-        driver.findElement(usernameFld).sendKeys(username);
+        waitForElementToBeVisible(usernameFld).sendKeys(username);
         return this;
     }
 
     public CheckoutPage enterPassword(String password) {
-        driver.findElement(passwordFld).sendKeys(password);
+        waitForElementToBeVisible(passwordFld).sendKeys(password);
         return this;
     }
 
     public CheckoutPage clickLoginBtn() {
-        driver.findElement(loginBtn).click();
+        waitForElementToBeClickable(loginBtn).click();
         return this;
     }
 
     /**
      * Functional method to login
      *
-     * @param user
-     * @return
+     * @param user - User to login
+     * @return CheckoutPage
      */
     public CheckoutPage login(User user) {
         return enterUsername(user.getUsername()).

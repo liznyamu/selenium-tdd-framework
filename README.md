@@ -57,15 +57,20 @@
 
 
 ### Other guidelines / practices
-- Manage test data (ie Data Objects) as Java Objects using POJOs (eg BillingAddress, Products, Users )
+- **Manage test data (ie Data Objects) as Java Objects using POJOs** (eg BillingAddress, Products, Users )
   - Used Builder design pattern - allow chaining methods 
   - Create a JSON file - to store the test data and re-use data (eg BillingAddress, Products)
     - using *Jackson Databind* to [de-serialize the JSON file](https://stackoverflow.com/questions/3316762/what-is-deserialize-and-serialize-in-json)
     - used a *Parameterized constructor* - more *flexibility* of using the object & increase *readability*
   - Pros: *Low maintenance* + *DRY* + *SRP*
     - if there's a field added or removed on the form - it's easier to manage via POM without updating the test case OR changing it in multiple locations
-  
 
+- **Synchronization**
+  - use * implicit or explicit (preferred) or fluent waits* for the Selenium WebDriver to wait desired state of the DOM (on the browser)
+  - Explicit Wait Strategies
+    - wait for page title/URL to show 
+    - wait for slowest element to show  (but not reliable AJAX may reload some other element)
+    - wait for each UI element  (slowest but most reliable on AJAX calls reloading the DOM and flexible which expected conditions to be met)
 
 ## Bad Practices
 - Non-atomic tests

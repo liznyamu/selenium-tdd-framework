@@ -2,11 +2,13 @@ package org.selenium.pom.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
 
 public class CartPage extends BasePage {
     private final By productName = By.cssSelector("td[class='product-name'] a");
     private final By checkoutBtn = By.cssSelector(".checkout-button");
+    private final By cartTitle = By.xpath("//h1[text()='Cart']");
 
 
     public CartPage(WebDriver driver) {
@@ -14,12 +16,23 @@ public class CartPage extends BasePage {
     }
 
     public String getProductName(){
-        return driver.findElement(productName).getText();
+       return waitForElementToBeVisible(productName).
+               getText();
     }
 
     public CheckoutPage checkout(){
-        driver.findElement(checkoutBtn).click();
+        waitForElementToBeClickable(checkoutBtn).
+                click();
         return new CheckoutPage(driver);
+    }
+
+    /**
+     * Wait for slowest element to load
+     *
+     * @return Boolean
+     */
+    public Boolean isLoaded(){
+        return waitForTextToMatch(cartTitle, "Cart");
     }
 
 }
