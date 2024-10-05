@@ -56,6 +56,17 @@
     - So that the test case is representing more of what is happening  rather than how it’s happening for example `"HomePage.goToStoreUsingMenu()"` or `"HomePage.navigateToStoreUsingMenu()"` represents the `“what”` while `"HomePage.clickStoreMenuLink()"` represents the `how()` -—> we should avoid the `“how”` part in the test case 
 
 
+### Other guidelines / practices
+- Manage test data (ie Data Objects) as Java Objects using POJOs (eg BillingAddress, Products, Users )
+  - Used Builder design pattern - allow chaining methods 
+  - Create a JSON file - to store the test data and re-use data (eg BillingAddress, Products)
+    - using *Jackson Databind* to [de-serialize the JSON file](https://stackoverflow.com/questions/3316762/what-is-deserialize-and-serialize-in-json)
+    - used a *Parameterized constructor* - more *flexibility* of using the object & increase *readability*
+  - Pros: *Low maintenance* + *DRY* + *SRP*
+    - if there's a field added or removed on the form - it's easier to manage via POM without updating the test case OR changing it in multiple locations
+  
+
+
 ## Bad Practices
 - Non-atomic tests
 - Code duplication
