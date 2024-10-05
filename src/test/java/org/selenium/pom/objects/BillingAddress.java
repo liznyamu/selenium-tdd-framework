@@ -3,8 +3,10 @@ package org.selenium.pom.objects;
 public class BillingAddress {
     private String firstName;
     private String lastName;
+    private String country;
     private String addressLineOne;
     private String city;
+    private String state;
     private String postCode;
     private String email;
 
@@ -12,12 +14,14 @@ public class BillingAddress {
 
     }
 
-    public BillingAddress(String firstName, String lastName, String addressLineOne, String city,
-                          String postCode, String email) {
+    public BillingAddress(String firstName, String lastName, String country, String addressLineOne, String city,
+                          String state, String postCode, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.country = country;
         this.addressLineOne = addressLineOne;
         this.city = city;
+        this.state = state;
         this.postCode = postCode;
         this.email = email;
     }
@@ -73,6 +77,24 @@ public class BillingAddress {
 
     public BillingAddress setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public BillingAddress setCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public BillingAddress setState(String state) {
+        this.state = state;
         return this;
     }
 }

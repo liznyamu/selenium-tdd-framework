@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.selenium.pom.base.BasePage;
 import org.selenium.pom.objects.BillingAddress;
 import org.selenium.pom.objects.User;
@@ -12,17 +13,22 @@ import org.selenium.pom.objects.User;
 public class CheckoutPage extends BasePage {
     private final By billingFirstNameFld = By.id("billing_first_name");
     private final By billingLastNameFld = By.id("billing_last_name");
+    private final By billingCountryDropDown = By.id("billing_country");
     private final By billingAddressOneFld = By.id("billing_address_1");
     private final By billingCityFld = By.id("billing_city");
+    private final By billingStateDropDown = By.id("billing_state");
     private final By billingPostCodeFld = By.id("billing_postcode");
     private final By billingEmailFld = By.id("billing_email");
+
+    private final By overlay = By.cssSelector(".blockOverlay");
+    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
     private final By placeOrderBtn = By.id("place_order");
     private final By successNotice = By.cssSelector(".woocommerce-notice");
+
     private final By clickHereToLoginLnk = By.cssSelector(".showlogin");
     private final By usernameFld = By.id("username");
     private final By passwordFld = By.id("password");
     private final By loginBtn = By.name("login");
-    private final By overlay = By.cssSelector(".blockOverlay");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -30,8 +36,7 @@ public class CheckoutPage extends BasePage {
     }
 
     /**
-     * Note we are getting rid or handling some of the user state dependency
-     * by clearing text fields before filling them for registered users
+     * Clear firstName field to remove user state dependency on the tests
      *
      * @param firstName - billing address first name
      * @return CheckoutPage
@@ -50,6 +55,19 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
+    /**
+     *  Select state - to remove user state dependency on the tests
+     *
+     * @param countryName - billing country name
+     * @return CheckoutPage
+     */
+    public CheckoutPage selectCountry(String countryName){
+        WebElement element = waitForElementToBeVisible(billingCountryDropDown);
+        Select select = new Select(element);
+        select.selectByVisibleText(countryName);
+        return this;
+    }
+
     public CheckoutPage enterAddressOne(String addressOne) {
         WebElement element = waitForElementToBeVisible(billingAddressOneFld);
         element.clear();
@@ -61,6 +79,19 @@ public class CheckoutPage extends BasePage {
         WebElement element = waitForElementToBeVisible(billingCityFld);
         element.clear();
         element.sendKeys(city);
+        return this;
+    }
+
+    /**
+     * Select state - to remove/avoid user state dependency on the tests
+     *
+     * @param stateName - billing state name
+     * @return CheckoutPage
+     */
+    public CheckoutPage selectState(String stateName){
+        WebElement element = waitForElementToBeVisible(billingStateDropDown);
+        Select select = new Select(element);
+        select.selectByVisibleText(stateName);
         return this;
     }
 
@@ -81,10 +112,25 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage enterBillingAddress(BillingAddress billingAddress) {
         enterFirstName(billingAddress.getFirstName()).
                 enterLastName(billingAddress.getLastName()).
+                selectCountry(billingAddress.getCountry()).
                 enterAddressOne(billingAddress.getAddressLineOne()).
                 enterCity(billingAddress.getCity()).
+                selectState(billingAddress.getState()).
                 enterPostCode(billingAddress.getPostCode()).
                 enterEmail(billingAddress.getEmail());
+        return this;
+    }
+
+    /**
+     * Select direct bank transfer payment option - to remove/avoid application state dependency on the tests
+     *
+     * @return CheckoutPage
+     */
+    public CheckoutPage selectDirectBankTransfer(){
+        WebElement element = waitForElementToBeVisible(directBankTransferRadioBtn);
+        if(!element.isSelected()){
+            element.click();
+        }
         return this;
     }
 

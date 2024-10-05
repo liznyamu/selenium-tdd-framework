@@ -1,8 +1,10 @@
 {
   "firstName": "Agatha",
   "lastName": "Harkness",
+  "country": "United States (US)",
   "addressLineOne": "Salem",
-  "city": "Massachusetts",
+  "city": "Essex County",
+  "state": "Massachusetts",
   "postCode": "94188",
   "email": "agatha.harkness@gmail.com"
 }

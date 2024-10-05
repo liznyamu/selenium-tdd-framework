@@ -29,19 +29,18 @@ public class MyFirstTestCase extends BaseTest {
         // using the Builder pattern
         StorePage storePage = new HomePage(driver).
                 load().
-                goToStoreUsingMenu();
-        storePage.isLoaded();
-        storePage.search(searchTxt);
+                goToStoreUsingMenu().
+                search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
         CartPage cartPage = storePage.addToCart(product.getName());
-        cartPage.isLoaded();
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
         // using the Builder pattern
         CheckoutPage checkoutPage = cartPage.
                 checkout().
                 enterBillingAddress(billingAddress).
+                selectDirectBankTransfer().
                 placeOrder();
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
     }
@@ -74,7 +73,9 @@ public class MyFirstTestCase extends BaseTest {
                 checkout().
                 clickHereToLogin().
                 login(user).
-                enterBillingAddress(billingAddress).placeOrder();
+                enterBillingAddress(billingAddress).
+                selectDirectBankTransfer().
+                placeOrder();
         Assert.assertEquals(checkoutPage.getNotice(),"Thank you. Your order has been received.");
     }
 }

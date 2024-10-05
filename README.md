@@ -64,13 +64,21 @@
     - used a *Parameterized constructor* - more *flexibility* of using the object & increase *readability*
   - Pros: *Low maintenance* + *DRY* + *SRP*
     - if there's a field added or removed on the form - it's easier to manage via POM without updating the test case OR changing it in multiple locations
+       - *Good Practice:* ideally a test case should be updated only if there's a change in the requirement
 
 - **Synchronization**
-  - use * implicit or explicit (preferred) or fluent waits* for the Selenium WebDriver to wait desired state of the DOM (on the browser)
+  - use *implicit or explicit (preferred) or fluent waits* for the Selenium WebDriver to wait desired state of the DOM (on the browser)
   - Explicit Wait Strategies
     - wait for page title/URL to show 
     - wait for slowest element to show  (but not reliable AJAX may reload some other element)
     - wait for each UI element  (slowest but most reliable on AJAX calls reloading the DOM and flexible which expected conditions to be met)
+
+- **Test Optimizations**
+  - remove/avoid  user and application state dependency
+    - eg `billing country/city` address are set by the app to default OR could be set by another user/test to `USA/California` 
+    - eg `Payment option` is set by default on the app as `Direct Bank transfer` BUT it could be set by app/another user/ another test to `Cash on delivery`
+    - *Good Practice :* we need to remove/avoid user and application state dependency by selecting the `billing country/city` and `Payment option` on the test
+
 
 ## Bad Practices
 - Non-atomic tests
