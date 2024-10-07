@@ -81,9 +81,18 @@
     - *Good Practice :* we need to remove/avoid user and application state dependency by selecting the `billing country/city` and `Payment option` on the test
 
 - **Page Factory**
-  - implemented on the `CartPage`
+  - implemented on the `CartPage` class
   - Page Factory or no Page Factory (ie use `By` class) - is up to individual preferences 
 
+- **Automated Driver Management**
+  - added on the `DriverManager` class
+
+- **Different ways to Drive Automation**
+  - `ThumbRule:` integrate your 1st test case to the CI process as soon as possible
+    - get immediate feedback on the performance of the automation
+  1. Maven - by setting system properties or TestNG.xml
+  2. IDE (IntelliJ) - by setting JVM arguments
+  3. TestNG.xml - using parameters
 
 
 ## Bad Practices
