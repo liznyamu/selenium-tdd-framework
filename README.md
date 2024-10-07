@@ -203,6 +203,14 @@
     - Pros: handles code duplication
   - added package `pages.components`
     - initialized the component classes on the required page classes
+  
+
+- [ ] ** TODO - Handling Parallel Execution Issues ** (Section 30)
+- [ ] ** TODO - Factory Design Pattern ** (Section 31)
+- [ ] ** TODO - Screenshot  + OOP concepts  ** (Section 32, 33)
+- [ ] ** TODO - Assignments ** (Section 35)
+- [ ] ** TODO - Allure Repors ** (Section 36)
+- [x] ** TODO - Framework CI ** (Section 38)
 
 
 ## Bad Practices
