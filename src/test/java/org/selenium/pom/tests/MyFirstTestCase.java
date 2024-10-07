@@ -26,7 +26,7 @@ public class MyFirstTestCase extends BaseTest {
         String searchTxt = "Blue";
 
         // using the Builder pattern
-        StorePage storePage = new HomePage(driver).
+        StorePage storePage = new HomePage(getDriver()).
                 load().
                 goToStoreUsingMenu().
                 search(searchTxt);
@@ -45,7 +45,7 @@ public class MyFirstTestCase extends BaseTest {
     }
 
 
-    @Test(enabled = false)
+    @Test
     public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
         // extract billing address and product test data from json
         BillingAddress billingAddress = JacksonUtils.deserialize("myBillingAddress.json", BillingAddress.class);
@@ -58,7 +58,7 @@ public class MyFirstTestCase extends BaseTest {
         String searchTxt = "Blue";
 
         // using the Builder pattern
-        StorePage storePage = new HomePage(driver).
+        StorePage storePage = new HomePage(getDriver()).
                 load().
                 goToStoreUsingMenu().
                 search(searchTxt);

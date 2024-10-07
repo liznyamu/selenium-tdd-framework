@@ -7,12 +7,10 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverManager {
 
-    public WebDriver initializeDriver(String browser) throws InterruptedException {
-        // TestNG parameter takes precedence over JVM TestNG template or maven system properties
-        String localBrowser = (!browser.isEmpty())? browser: System.getProperty("browser", "CHROME");
+    public WebDriver initializeDriver(String browser){
         WebDriver driver;
 
-        switch(String.valueOf(localBrowser)){
+        switch(String.valueOf(browser)){
             case "CHROME":
                 WebDriverManager.chromedriver().cachePath("drivers").setup();
                 driver = new ChromeDriver();
@@ -22,7 +20,7 @@ public class DriverManager {
                 driver = new FirefoxDriver();
                 break;
             default:
-                throw new IllegalStateException("Invalid browser name: " + localBrowser);
+                throw new IllegalStateException("Invalid browser name: " + browser);
         }
 
         driver.manage().window().maximize();

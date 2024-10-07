@@ -111,11 +111,25 @@
        - Chrome: `mvn clean test -Dsurefire.suiteXmlFiles=testng.xml`
        - Firefox: `mvn clean test -Dsurefire.suiteXmlFiles=testng.xml,testng_firefox.xml`
      - use default TestNG.xml and make automation flexible 
-       - `pom.xml`: ```<properties><suiteFile>testng.xml</suiteFile></properties>```
+       - `pom.xml`: 
+       - ```xml 
+            <properties><suiteFile>testng.xml</suiteFile></properties>
+         ```
        - Firefox: `mvn clean test -DsuiteFile=testng.xml`
        - Default (Chrome): `mvn clean test`
 
 - **Parallel Execution**
+  - very important to design the automation for parallel execution AND it should not be an afterthought
+  - Basic Principles: **Independent tests** by:
+    1. no TestNG priorities
+    2. avoid instance variables
+    3. use stateless methods (ie use local variables in methods)
+    4. no driver sharing
+    5. no sharing of test data or application/user state
+    6. avoid static variables (use thread local variables)
+  - Option 1:  Drive parallel execution using Maven surefire plugin - https://maven.apache.org/surefire/maven-surefire-plugin/examples/testng.html
+  - Option 2: Drive parallel execution using TestNG - `testng_parallel_execution.xml` or cloud options (browserstack, saucelabs etc) - cause of slow execution
+  - Option 2: Drive parallel execution using TestNG via Maven (see above surefire settings)
 
 
 ## Bad Practices

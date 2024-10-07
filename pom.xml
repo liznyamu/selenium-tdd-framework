@@ -54,8 +54,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>10</source>
-                    <target>10</target>
+                    <source>19</source>
+                    <target>19</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -63,10 +63,16 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
+                    <!--
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteFile}</suiteXmlFile>
-<!--                        <suiteXmlFile>testng_firefox.xml</suiteXmlFile>-->
-                    </suiteXmlFiles>
+                        <suiteXmlFile>testng_firefox.xml</suiteXmlFile>
+                    </suiteXmlFiles>-->
+
+                    <!-- parallel execution via mvn surefire -->
+                    <parallel>methods</parallel>
+                    <threadCount>2</threadCount>
+
                 </configuration>
             </plugin>
         </plugins>
