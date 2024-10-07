@@ -40,11 +40,11 @@ public class SignUpApi {
         Response response = given().
                 baseUri(ConfigLoader.getInstance().getBaseUrl()).
                 cookies(emptyCookies).
-//                log().all().
+                log().all().
                 when().
                 get("/account").
                 then().
-//                log().all().
+                log().all().
                 extract().
                 response();
 
@@ -71,11 +71,11 @@ public class SignUpApi {
                 headers(headers).
                 formParams(formParams).
                 cookies(emptyCookies).
-//                log().all().
+                log().all().
         when().
                 post("/account").
                 then().
-//                log().all().
+                log().all().
         extract().
                 response();
 

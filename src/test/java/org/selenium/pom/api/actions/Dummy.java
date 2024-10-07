@@ -46,7 +46,7 @@ public class Dummy {
         signUpApi.register(user);
         System.out.println("REGISTER API COOKIES: " + signUpApi.getCookies());
 
-        CartApi cartApi = new CartApi();
+        CartApi cartApi = new CartApi(signUpApi.getCookies());
         cartApi.addToCart(1215, 1);
         System.out.println("CART API COOKIES: " + cartApi.getCookies());
 

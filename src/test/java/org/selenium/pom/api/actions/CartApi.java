@@ -27,7 +27,6 @@ public class CartApi {
     }
 
     public Response addToCart(int productId, int quantity){
-        Cookies emptyCookies = new Cookies();
         Header header = new Header("content-type", "application/x-www-form-urlencoded");
         Headers headers = new Headers(header);
 
@@ -46,12 +45,12 @@ public class CartApi {
                 baseUri(ConfigLoader.getInstance().getBaseUrl()).
                 headers(headers).
                 formParams(formParams).
-                cookies(emptyCookies).
-//                log().all().
+                cookies(cookies).
+                log().all().
         when().
                 post("/?wc-ajax=add_to_cart").
                 then().
-//                log().all().
+                log().all().
         extract().
                 response();
 

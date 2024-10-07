@@ -151,17 +151,40 @@
       - `<see detailed notes (for examples)>`
   - [follow selenium recommendations as a guideline](https://www.selenium.dev/documentation/test_practices/encouraged)
 
-- **Convert to Atomic Tests**
-  - added `test.NavigationTest` class
-  - added `test.SearchTest` class
-    - added method to load store page directly
-    - waited for the store page url to change - before asserting search results
-  - added `test.AddToCartTest` class
-
 - **API Integration**
   - `<Refer to RestAssured course for more info>`
   - Dependencies : Rest Assured | JSoup - Java HTML Parser | Faker
   - Parse HTML response: Groovy GPath vs JSoup CSS
+
+
+- **Convert/Add Atomic Tests + Re-run the test in parallel - TODO : 165**
+  - [x] added `test.NavigationTest` class
+  - [x] added `test.SearchTest` class
+    - added method to load store page directly
+    - waited for the store page url to change - before asserting search results
+  - [x] added `test.AddToCartTest` class 
+  - [x] added `test.LoginTest` class (after API integration)
+  - [x] added `test.CheckoutTest` class (after API integration)
+  - [ ] Add tests cases `NavigationTest`
+    - [ ] navigateFromStoreToProductPage
+    - [ ] navigateFromHomeToFeaturedProductPage
+  - [ ] Add tests cases `AddToCartTest`
+    - [ ] addFeaturedProductToCart (`*hint*` add feature attribute on Product POJO)
+    - [ ] addToCartFromProductPage
+  - [ ] Add tests cases `CheckoutTest`
+    - [ ] guestCheckoutUsingCashOnDelivery
+    - [ ] loginAndCheckoutUsingCashOnDelivery
+    - [ ] loginAndCheckoutUsingDirectBankTransfer
+      - [x] (API) Register User 
+      - [ ] (API) Edit billing user 
+      - [x] (API) Add product to cart
+  - [ ] Add tests cases `SearchTest`
+    - [ ] searchWithExactMatch (`*hint*` validate product results)
+    - [ ] searchNonExistingProduct
+  - [ ] Add tests cases `LoginTest`
+    - [ ] loginFails
+
+- **Refactor (use re-usable) methods for API integration/classes - TODO : 166**
 
 
 ## Bad Practices

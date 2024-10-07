@@ -24,6 +24,7 @@ public class CheckoutPage extends BasePage {
     private final By billingEmailFld = By.id("billing_email");
 
     private final By overlay = By.cssSelector(".blockOverlay");
+    private final By productName = By.cssSelector("td[class='product-name']");
     private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
     private final By placeOrderBtn = By.id("place_order");
     private final By successNotice = By.cssSelector(".woocommerce-notice");
@@ -36,6 +37,11 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
+    }
+
+    public CheckoutPage load(){
+        load("/checkout/");
+        return this;
     }
 
     /**
@@ -194,6 +200,10 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage login(User user) {
         return enterUsername(user.getUsername()).
                 enterPassword(user.getPassword()).clickLoginBtn();
+    }
+
+    public String getProductName(){
+        return waitForElementToBeVisible(productName).getText();
     }
 
 }

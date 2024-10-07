@@ -16,4 +16,14 @@ public class SearchTest extends BaseTest {
 
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
     }
+
+    @Test(enabled = false, groups={"TODO"})
+    public void searchWithExactMatch(){
+        // TODO add test
+    }
+
+    @Test(enabled = false, groups={"TODO"})
+    public void searchNonExistingProduct(){
+        // TODO add test
+    }
 }

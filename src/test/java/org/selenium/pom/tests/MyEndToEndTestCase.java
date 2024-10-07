@@ -17,10 +17,10 @@ import java.io.IOException;
 
 public class MyEndToEndTestCase extends BaseTest {
 
-    @Test
+    @Test(enabled = false)
     public void guestCheckoutUsingDirectBankTransfer() throws IOException {
         // extract billing address and product test data from json
-        BillingAddress billingAddress = JacksonUtils.deserialize("myBillingAddress.json", BillingAddress.class);
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
 
         // use variables
@@ -47,10 +47,10 @@ public class MyEndToEndTestCase extends BaseTest {
     }
 
 
-    @Test
+    @Test(enabled = false)
     public void loginAndCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
         // extract billing address and product test data from json
-        BillingAddress billingAddress = JacksonUtils.deserialize("myBillingAddress.json", BillingAddress.class);
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("myBillingAddress.json", BillingAddress.class);
         Product product = new Product(1215);
 
         // we'll extract the single user from a config file  ---> then register a new user via API

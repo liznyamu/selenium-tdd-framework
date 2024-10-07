@@ -11,10 +11,21 @@ import org.testng.annotations.Test;
  */
 public class NavigationTest extends BaseTest {
     @Test
-    public  void NavigateFromHomeToStoreUsingMainMenu(){
+    public  void navigateFromHomeToStoreUsingMainMenu(){
         StorePage storePage = new HomePage(getDriver()).
                 load().
                 goToStoreUsingMenu();
         Assert.assertEquals(storePage.getTitle(), "Store");
     }
+
+    @Test(enabled = false, groups={"TODO"})
+    public  void navigateFromStoreToProductPage(){
+        // TODO add test
+    }
+
+    @Test(enabled = false, groups={"TODO"})
+    public  void navigateFromHomeToFeaturedProductPage(){
+        // TODO add test
+    }
+
 }

@@ -23,7 +23,7 @@ public class Product {
      */
     public Product(int id) throws IOException {
         // extract the Products array
-        Product[] products = JacksonUtils.deserialize("products.json", Product[].class);
+        Product[] products = JacksonUtils.deserializeJson("products.json", Product[].class);
 
         // extract our desired product
         for(Product product: products){

@@ -20,4 +20,14 @@ public class AddToCartTest extends BaseTest {
         Assert.assertEquals(cartPage.getProductName(),product.getName());
     }
 
+    @Test(enabled = false, groups={"TODO"})
+    public void addFeaturedProductToCart(){
+        // (`*hint*` add feature attribute on Product POJO)
+    }
+
+    @Test(enabled = false, groups={"TODO"})
+    public void addToCartFromProductPage(){
+
+    }
+
 }
