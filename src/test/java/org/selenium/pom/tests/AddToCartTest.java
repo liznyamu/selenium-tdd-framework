@@ -16,26 +16,27 @@ public class AddToCartTest extends BaseTest {
     @Test
     public void addToCartFromStorePage() throws IOException {
         Product product = new Product(1215);
-        CartPage cartPage= new StorePage(getDriver()).
-                load().
-                addToCart(product.getName());
-        Assert.assertEquals(cartPage.getProductName(),product.getName());
+        CartPage cartPage = new StorePage(getDriver()).load()
+                .getProductThumbnail()
+                .addToCart(product.getName());
+        Assert.assertEquals(cartPage.getProductName(), product.getName());
     }
 
-    @Test(groups={"TODO"},
-            dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class )
-    public void addFeaturedProductToCart(Product product){
+    @Test(groups = {"TODO"},
+            dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class)
+    public void addFeaturedProductToCart(Product product) {
         //TODO  (`*hint*` add featured:true/false attribute on Product POJO)
 
-        CartPage cartPage = new HomePage(getDriver())
-                .load()
-                .addToCart(product.getName());
+        CartPage cartPage = new HomePage(getDriver()).
+                load().
+                getProductThumbnail().
+                addToCart(product.getName());
         Assert.assertEquals(cartPage.getProductName(), product.getName());
 
     }
 
-    @Test(enabled = false, groups={"TODO"})
-    public void addToCartFromProductPage(){
+    @Test(enabled = false, groups = {"TODO"})
+    public void addToCartFromProductPage() {
 
     }
 

@@ -3,6 +3,7 @@ package org.selenium.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.pages.components.ProductThumbnail;
 
 public class StorePage extends BasePage {
 
@@ -11,8 +12,15 @@ public class StorePage extends BasePage {
     private final By title = By.cssSelector(".woocommerce-products-header__title.page-title");
     private final By viewCartLnk = By.cssSelector("a[title='View cart']");
 
+    private ProductThumbnail productThumbnail;
+
     public StorePage(WebDriver driver) {
         super(driver);
+        productThumbnail = new ProductThumbnail(driver);
+    }
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
     }
 
     public Boolean isLoaded(){
@@ -49,36 +57,5 @@ public class StorePage extends BasePage {
 
     public String getTitle(){
         return waitForElementToBeVisible(title).getText();
-    }
-
-    /**
-     * Handle dynamically generated UI elements
-     * @param productName - product name to add
-     * @return By
-     */
-    private By getAddToCartBtnElement(String productName){
-        return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
-    }
-
-    public StorePage clickAddToCartBtn(String productName){
-        By addToCartBtn = getAddToCartBtnElement(productName);
-        waitForElementToBeClickable(addToCartBtn).click();
-        return this;
-    }
-
-    public CartPage clickViewCartLnk(){
-        waitForElementToBeClickable(viewCartLnk).click();
-        return new CartPage(driver);
-    }
-
-    /**
-     * Add product to cart - (Functional vs Structural methods on POM)
-     *
-     * @param productName - product name to add
-     * @return CartPage
-     */
-    public CartPage addToCart(String productName){
-        return clickAddToCartBtn(productName).
-                clickViewCartLnk();
     }
 }

@@ -193,6 +193,16 @@
   - [ ] add multiple (3 or more products) from the Store page to cart
   - [ ] add test to validate the checkout process (can be guest/registered user, can be direct or cash on delivery) for billing address in India, UK and US (ie create billing address for the 3 countries)
   
+- **Composition**
+  - Composition vs Inheritance
+  - `Inheritance` 
+    - use when we know **ALL features** in the `ParentClass` are going to be used on the `SubClass`
+  - `Composition` 
+    - better to use `composition over inheritance` when **some of features** are going to be used by **SOME** of the classes
+    - Pros: helps to avoid having bulky parent classes
+    - Pros: handles code duplication
+  - added package `pages.components`
+    - initialized the component classes on the required page classes
 
 
 ## Bad Practices

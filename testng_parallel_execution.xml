@@ -16,7 +16,7 @@
 
         </classes>-->
     </test>
-<!--    <test verbose="2" name="Firefox"  thread-count="2" parallel="methods">
+<!--    <test verbose="2" name="Firefox"  thread-count="4" parallel="methods">
         <parameter name="browser" value="FIREFOX"/>
         <classes>
             <class name="org.selenium.pom.tests.MyEndToEndTestCase">

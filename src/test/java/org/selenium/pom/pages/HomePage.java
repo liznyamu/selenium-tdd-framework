@@ -3,21 +3,29 @@ package org.selenium.pom.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.pages.components.MyHeader;
+import org.selenium.pom.pages.components.ProductThumbnail;
 
 public class HomePage extends BasePage {
 
-    // TODO use a better locator strategy
-    private final By storeMenuLink = By.cssSelector("#menu-item-1227 > a");
-    private final By viewCartLnk = By.cssSelector("a[title='View cart']");
+    private MyHeader myHeader;
+    private ProductThumbnail productThumbnail;
 
     public HomePage(WebDriver driver) {
+
         super(driver);
+        myHeader = new MyHeader(driver);
+        productThumbnail = new ProductThumbnail(driver);
     }
 
-    public StorePage goToStoreUsingMenu(){
-        waitForElementToBeClickable(storeMenuLink).click();
-        return new StorePage(driver);
+    public MyHeader getMyHeader() {
+        return myHeader;
     }
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
+
 
     public HomePage load(){
         load("/");
@@ -25,35 +33,6 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    /**
-     * Handle dynamically generated UI elements
-     * @param productName - product name to add
-     * @return By
-     */
-    private By getAddToCartBtnElement(String productName){
-        return By.cssSelector("a[aria-label='Add “" + productName + "” to your cart']");
-    }
 
-    public HomePage clickAddToCartBtn(String productName){
-        By addToCartBtn = getAddToCartBtnElement(productName);
-        waitForElementToBeClickable(addToCartBtn).click();
-        return this;
-    }
-
-    public CartPage clickViewCartLnk(){
-        waitForElementToBeClickable(viewCartLnk).click();
-        return new CartPage(driver);
-    }
-
-    /**
-     * Add product to cart - (Functional vs Structural methods on POM)
-     *
-     * @param productName - product name to add
-     * @return CartPage
-     */
-    public CartPage addToCart(String productName){
-        return clickAddToCartBtn(productName).
-                clickViewCartLnk();
-    }
 
 }

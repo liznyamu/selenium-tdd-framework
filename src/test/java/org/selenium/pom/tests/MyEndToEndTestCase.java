@@ -29,12 +29,15 @@ public class MyEndToEndTestCase extends BaseTest {
         // using the Builder pattern
         StorePage storePage = new HomePage(getDriver()).
                 load().
+                getMyHeader().
                 goToStoreUsingMenu();
         storePage.isLoaded();
         storePage.search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
-        CartPage cartPage = storePage.addToCart(product.getName());
+        CartPage cartPage = storePage.
+                getProductThumbnail().
+                addToCart(product.getName());
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
         // using the Builder pattern
@@ -64,11 +67,14 @@ public class MyEndToEndTestCase extends BaseTest {
         // using the Builder pattern
         StorePage storePage = new HomePage(getDriver()).
                 load().
+                getMyHeader().
                 goToStoreUsingMenu().
                 search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
-        CartPage cartPage = storePage.addToCart(product.getName());
+        CartPage cartPage = storePage.
+                getProductThumbnail().
+                addToCart(product.getName());
         Assert.assertEquals(cartPage.getProductName(),product.getName());
 
         // using the Builder pattern
