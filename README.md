@@ -142,7 +142,20 @@
 
 - **Support Multiple Environments**
   - executes tests on staging/QA, or dev/local or UAT or production environments without changing the automation code
-  - 
+
+- **Problem with End-to-End Tests (non-atomic tests)**
+  - see detailed notes
+    1. too many things 
+    2. blocks functionality
+    3. duplication
+    4. late feedback
+    5. unreliable - more flaky
+    6. high execution time
+    7. same user - shared test data
+  - refactor test cases | modularize tests - use atomic tests
+    - create independent tests 
+      - see detailed notes (for examples)
+  - [follow selenium recommendations as a guideline](https://www.selenium.dev/documentation/test_practices/encouraged)
 
 
 ## Bad Practices
