@@ -129,7 +129,7 @@
   - No need to use `ThreadLocal` class - each test will get an different instance of the `BaseTest` class and the test classes 
   - So we don't need to use the `ThreadLocal` class to create separate copies of the `WebDriver` as there's no shared instance (like on `TestNG`)
 
--  **Singleton Design Pattern**
+- **Singleton Design Pattern**
   - remove hardcoded global (initialized/loaded once, shared across the framework) configs  using `config.properties` file
     - ie hardcoded `baseUrl, username and password` 
   - use the singleton config loader class `utils.ConfigLoader` where the constructor is private
@@ -151,13 +151,18 @@
       - `<see detailed notes (for examples)>`
   - [follow selenium recommendations as a guideline](https://www.selenium.dev/documentation/test_practices/encouraged)
 
-
 - **Convert to Atomic Tests**
   - added `test.NavigationTest` class
   - added `test.SearchTest` class
     - added method to load store page directly
     - waited for the store page url to change - before asserting search results
   - added `test.AddToCartTest` class
+
+- **API Integration**
+  - `<Refer to RestAssured course for more info>`
+  - Dependencies : Rest Assured | JSoup - Java HTML Parser | Faker
+  - Parse HTML response: Groovy GPath vs JSoup CSS
+
 
 ## Bad Practices
 - Non-atomic tests
