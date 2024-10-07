@@ -1,8 +1,10 @@
 package org.selenium.pom.tests;
 
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.dataproviders.MyDataProvider;
 import org.selenium.pom.objects.Product;
 import org.selenium.pom.pages.CartPage;
+import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.StorePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,9 +22,16 @@ public class AddToCartTest extends BaseTest {
         Assert.assertEquals(cartPage.getProductName(),product.getName());
     }
 
-    @Test(enabled = false, groups={"TODO"})
-    public void addFeaturedProductToCart(){
-        // (`*hint*` add feature attribute on Product POJO)
+    @Test(groups={"TODO"},
+            dataProvider = "getFeaturedProducts", dataProviderClass = MyDataProvider.class )
+    public void addFeaturedProductToCart(Product product){
+        //TODO  (`*hint*` add featured:true/false attribute on Product POJO)
+
+        CartPage cartPage = new HomePage(getDriver())
+                .load()
+                .addToCart(product.getName());
+        Assert.assertEquals(cartPage.getProductName(), product.getName());
+
     }
 
     @Test(enabled = false, groups={"TODO"})

@@ -186,6 +186,14 @@
 
 - **Refactor (use re-usable) methods for API integration/classes - TODO : 166**
 
+- **TestNG Data-provider - TODO : 173**
+  - [x] share data providers
+  - [x] run data provider tests in parallel
+  - [ ] select only products marked as featured (add `Boolean featured` attribute on `Products`)
+  - [ ] add multiple (3 or more products) from the Store page to cart
+  - [ ] add test to validate the checkout process (can be guest/registered user, can be direct or cash on delivery) for billing address in India, UK and US (ie create billing address for the 3 countries)
+  
+
 
 ## Bad Practices
 - Non-atomic tests
