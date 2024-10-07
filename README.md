@@ -86,13 +86,36 @@
 
 - **Automated Driver Management**
   - added on the `DriverManager` class
+  
+- **Multiple browser support**
+  - chrome, firefox
 
 - **Different ways to Drive Automation**
   - `ThumbRule:` integrate your 1st test case to the CI process as soon as possible
     - get immediate feedback on the performance of the automation
-  1. Maven - by setting system properties or TestNG.xml
-  2. IDE (IntelliJ) - by setting JVM arguments
-  3. TestNG.xml - using parameters
+  1. Maven - by setting system properties  (without TestNG)
+     - mvn command without passing browser name (with default browser set on reading system properties eg `CHROME`)
+       - `mvn clean test`
+     - mvn command to pass browser name 
+       - `mvn clean test -Dbrowser=CHROME`
+       - `mvn clean test -Dbrowser=FIREFOX`
+  2. IDE (IntelliJ) - by setting JVM arguments 
+     - TestNG template configurations : `-ea -Dbrowser=FIREFOX`
+  3. TestNG.xml  
+     - using system properties (JVM arguments)
+     - using parameters (Note: unset the JVM arguments as it overrides TestNG parameters)
+  4. TestNG.xml using Maven command 
+     - using surefire plugin (with `testng.xml` set on `pom.xml`)
+       - Default (Chrome): `mvn clean test`
+     - using system properties
+       - Chrome: `mvn clean test -Dsurefire.suiteXmlFiles=testng.xml`
+       - Firefox: `mvn clean test -Dsurefire.suiteXmlFiles=testng.xml,testng_firefox.xml`
+     - use default TestNG.xml and make automation flexible 
+       - `pom.xml`: ```<properties><suiteFile>testng.xml</suiteFile></properties>```
+       - Firefox: `mvn clean test -DsuiteFile=testng.xml`
+       - Default (Chrome): `mvn clean test`
+
+- **Parallel Execution**
 
 
 ## Bad Practices

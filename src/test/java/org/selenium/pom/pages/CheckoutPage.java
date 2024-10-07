@@ -2,6 +2,7 @@ package org.selenium.pom.pages;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,9 +15,11 @@ public class CheckoutPage extends BasePage {
     private final By billingFirstNameFld = By.id("billing_first_name");
     private final By billingLastNameFld = By.id("billing_last_name");
     private final By billingCountryDropDown = By.id("billing_country");
+    private final By alternateCountryDropdown = By.id("select2-billing_country-container");
     private final By billingAddressOneFld = By.id("billing_address_1");
     private final By billingCityFld = By.id("billing_city");
     private final By billingStateDropDown = By.id("billing_state");
+    private final By alternateStateDropdown = By.id("select2-billing_state-container");
     private final By billingPostCodeFld = By.id("billing_postcode");
     private final By billingEmailFld = By.id("billing_email");
 
@@ -62,9 +65,17 @@ public class CheckoutPage extends BasePage {
      * @return CheckoutPage
      */
     public CheckoutPage selectCountry(String countryName){
+        /*
+        // Handling Firefox - ElementNotInteractable Element <option> could not be scrolled into view
         WebElement element = waitForElementToBeVisible(billingCountryDropDown);
         Select select = new Select(element);
         select.selectByVisibleText(countryName);
+        */
+
+        waitForElementToBeClickable(alternateCountryDropdown).click();
+        WebElement element = waitForElementToBeClickable(By.xpath("//li[text()='" + countryName + "']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
         return this;
     }
 
@@ -89,9 +100,18 @@ public class CheckoutPage extends BasePage {
      * @return CheckoutPage
      */
     public CheckoutPage selectState(String stateName){
+
+        /*
+        // Handling Firefox - ElementNotInteractable Element <option> could not be scrolled into view
         WebElement element = waitForElementToBeVisible(billingStateDropDown);
         Select select = new Select(element);
         select.selectByVisibleText(stateName);
+        */
+
+        waitForElementToBeClickable(alternateStateDropdown).click();
+        WebElement element = waitForElementToBeClickable(By.xpath("//li[text()='" + stateName + "']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
         return this;
     }
 
