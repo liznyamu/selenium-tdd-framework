@@ -23,7 +23,8 @@
 - Fluent Interface
 - Builder pattern
 - Singleton design pattern
-- Factory design pattern
+- Page Factory design pattern
+  - Page Factory or no Page Factory (`By` class) ?
 
 ### OOP concepts
 - Inheritance
@@ -78,6 +79,11 @@
     - eg `billing country/city` address are set by the app to default OR could be set by another user/test to `USA/California` 
     - eg `Payment option` is set by default on the app as `Direct Bank transfer` BUT it could be set by app/another user/ another test to `Cash on delivery`
     - *Good Practice :* we need to remove/avoid user and application state dependency by selecting the `billing country/city` and `Payment option` on the test
+
+- **Page Factory**
+  - implemented on the `CartPage`
+  - Page Factory or no Page Factory (ie use `By` class) - is up to individual preferences 
+
 
 
 ## Bad Practices

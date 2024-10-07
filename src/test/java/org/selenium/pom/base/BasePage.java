@@ -58,8 +58,16 @@ public class BasePage {
        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public WebElement waitForElementToBeVisible(WebElement element){
+        return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public WebElement waitForElementToBeClickable(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public WebElement waitForElementToBeClickable(WebElement element){
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     /**
@@ -88,5 +96,9 @@ public class BasePage {
      */
     public Boolean waitForTextToMatch(By locator, String txt){
         return wait.until(ExpectedConditions.textToBe(locator, txt));
+    }
+
+    public Boolean waitForTextToMatch(WebElement element, String txt){
+        return wait.until(ExpectedConditions.textToBePresentInElement(element, txt));
     }
 }
