@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class MyFirstTestCase extends BaseTest {
+public class MyEndToEndTestCase extends BaseTest {
 
     @Test
     public void guestCheckoutUsingDirectBankTransfer() throws IOException {
@@ -29,8 +29,9 @@ public class MyFirstTestCase extends BaseTest {
         // using the Builder pattern
         StorePage storePage = new HomePage(getDriver()).
                 load().
-                goToStoreUsingMenu().
-                search(searchTxt);
+                goToStoreUsingMenu();
+        storePage.isLoaded();
+        storePage.search(searchTxt);
         Assert.assertEquals(storePage.getTitle(), "Search results: “" + searchTxt + "”");
 
         CartPage cartPage = storePage.addToCart(product.getName());

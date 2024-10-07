@@ -19,6 +19,11 @@ public class StorePage extends BasePage {
         return waitForUrlToContain("/store");
     }
 
+    public StorePage load(){
+        load("/store");
+        return  this;
+    }
+
     private StorePage enterTxtInSearchFld(String searchTxt){
         waitForElementToBeVisible(searchFld).sendKeys(searchTxt);
         return this;
@@ -26,6 +31,9 @@ public class StorePage extends BasePage {
 
     private StorePage clickSearchBtn(){
         waitForElementToBeClickable(searchBtn).click();
+
+        // wait for the page url to load before executing next command (eg asserting for search term on resulting page)
+        waitForUrlToContain("&post_type=product");
         return this;
     }
 

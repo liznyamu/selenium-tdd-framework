@@ -120,13 +120,7 @@
 
 - **Parallel Execution**
   - very important to design the automation for parallel execution AND it should not be an afterthought
-  - Basic Principles: **Independent tests** by:
-    1. no TestNG priorities
-    2. avoid instance variables (TODO: re-visit)
-    3. use stateless methods (ie use local variables in methods)
-    4. no driver sharing
-    5. no sharing of test data or application/user state
-    6. avoid static variables (use thread local variables)
+  - Basic Principles: **for Independent tests**  `<see detailed notes>`
   - Option 1:  Drive parallel execution using Maven surefire plugin - https://maven.apache.org/surefire/maven-surefire-plugin/examples/testng.html
   - Option 2: Drive parallel execution using TestNG - `testng_parallel_execution.xml` or cloud options (browserstack, saucelabs etc) - cause of slow execution
   - Option 2: Drive parallel execution using TestNG via Maven (see above surefire settings)
@@ -144,7 +138,7 @@
   - executes tests on staging/QA, or dev/local or UAT or production environments without changing the automation code
 
 - **Problem with End-to-End Tests (non-atomic tests)**
-  - see detailed notes
+  - `<see detailed notes>`
     1. too many things 
     2. blocks functionality
     3. duplication
@@ -152,11 +146,18 @@
     5. unreliable - more flaky
     6. high execution time
     7. same user - shared test data
-  - refactor test cases | modularize tests - use atomic tests
+  - refactor test cases | modularize tests | faster tests | less flaky - use atomic tests
     - create independent tests 
-      - see detailed notes (for examples)
+      - `<see detailed notes (for examples)>`
   - [follow selenium recommendations as a guideline](https://www.selenium.dev/documentation/test_practices/encouraged)
 
+
+- **Convert to Atomic Tests**
+  - added `test.NavigationTest` class
+  - added `test.SearchTest` class
+    - added method to load store page directly
+    - waited for the store page url to change - before asserting search results
+  - added `test.AddToCartTest` class
 
 ## Bad Practices
 - Non-atomic tests

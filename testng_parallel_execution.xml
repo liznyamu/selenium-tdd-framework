@@ -4,7 +4,7 @@
     <test verbose="2"  name="Chrome" thread-count="2"  parallel="methods">
         <parameter name="browser" value="CHROME"/>
         <classes>
-            <class name="org.selenium.pom.tests.MyFirstTestCase">
+            <class name="org.selenium.pom.tests.MyEndToEndTestCase">
                 <methods>
                     <include name="guestCheckoutUsingDirectBankTransfer"/>
                     <include name="loginAndCheckoutUsingDirectBankTransfer"/>
@@ -15,7 +15,7 @@
     <test verbose="2" name="Firefox"  thread-count="2" parallel="methods">
         <parameter name="browser" value="FIREFOX"/>
         <classes>
-            <class name="org.selenium.pom.tests.MyFirstTestCase">
+            <class name="org.selenium.pom.tests.MyEndToEndTestCase">
                 <methods>
                     <include name="guestCheckoutUsingDirectBankTransfer"/>
                     <include name="loginAndCheckoutUsingDirectBankTransfer"/>
