@@ -140,7 +140,9 @@
     - ie hardcoded `baseUrl, username and password` 
   - use the singleton config loader class `utils.ConfigLoader` where the constructor is private
 
-
+- **Support Multiple Environments**
+  - executes tests on staging/QA, or dev/local or UAT or production environments without changing the automation code
+  - 
 
 
 ## Bad Practices

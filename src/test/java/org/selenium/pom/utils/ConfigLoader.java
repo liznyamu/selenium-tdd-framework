@@ -1,5 +1,7 @@
 package org.selenium.pom.utils;
 
+import org.selenium.pom.constants.EnvType;
+
 import java.util.Properties;
 
 public class ConfigLoader {
@@ -11,7 +13,12 @@ public class ConfigLoader {
      *  by initializing/ loading them once, sharing them across the framework
      */
     private ConfigLoader(){
-        properties = PropertyUtils.propertyLoader("src/test/resources/config.properties");
+        String env = System.getProperty("env", String.valueOf(EnvType.STAGING));
+        switch (EnvType.valueOf(env)){
+            case PROD -> properties = PropertyUtils.propertyLoader("src/test/resources/prod_config.properties");
+            case STAGING -> properties = PropertyUtils.propertyLoader("src/test/resources/config.properties");
+            default -> throw new IllegalStateException("Invalid env provided ABORT!!" + env);
+        }
     }
 
     /**

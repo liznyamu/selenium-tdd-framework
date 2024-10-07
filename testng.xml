@@ -5,10 +5,10 @@
         <parameter name="browser" value="CHROME"/>
         <classes>
             <class name="org.selenium.pom.tests.MyFirstTestCase">
-                <methods>
-                    <include name="guestCheckoutUsingDirectBankTransfer"/>
-                    <include name="loginAndCheckoutUsingDirectBankTransfer"/>
-                </methods>
+<!--                <methods>-->
+<!--                    <include name="guestCheckoutUsingDirectBankTransfer"/>-->
+<!--                    <include name="loginAndCheckoutUsingDirectBankTransfer"/>-->
+<!--                </methods>-->
             </class>
         </classes>
     </test>
