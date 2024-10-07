@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
-    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     private void setDriver(WebDriver driver1){
         driver.set(driver1);

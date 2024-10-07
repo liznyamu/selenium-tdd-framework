@@ -122,7 +122,7 @@
   - very important to design the automation for parallel execution AND it should not be an afterthought
   - Basic Principles: **Independent tests** by:
     1. no TestNG priorities
-    2. avoid instance variables
+    2. avoid instance variables (TODO: re-visit)
     3. use stateless methods (ie use local variables in methods)
     4. no driver sharing
     5. no sharing of test data or application/user state
@@ -130,6 +130,17 @@
   - Option 1:  Drive parallel execution using Maven surefire plugin - https://maven.apache.org/surefire/maven-surefire-plugin/examples/testng.html
   - Option 2: Drive parallel execution using TestNG - `testng_parallel_execution.xml` or cloud options (browserstack, saucelabs etc) - cause of slow execution
   - Option 2: Drive parallel execution using TestNG via Maven (see above surefire settings)
+
+- **JUnit vs TestNG**
+  - No need to use `ThreadLocal` class - each test will get an different instance of the `BaseTest` class and the test classes 
+  - So we don't need to use the `ThreadLocal` class to create separate copies of the `WebDriver` as there's no shared instance (like on `TestNG`)
+
+-  **Singleton Design Pattern**
+  - remove hardcoded global (initialized/loaded once, shared across the framework) configs  using `config.properties` file
+    - ie hardcoded `baseUrl, username and password` 
+  - use the singleton config loader class `utils.ConfigLoader` where the constructor is private
+
+
 
 
 ## Bad Practices

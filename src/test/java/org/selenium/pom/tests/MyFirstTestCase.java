@@ -8,6 +8,7 @@ import org.selenium.pom.pages.CartPage;
 import org.selenium.pom.pages.CheckoutPage;
 import org.selenium.pom.pages.HomePage;
 import org.selenium.pom.pages.StorePage;
+import org.selenium.pom.utils.ConfigLoader;
 import org.selenium.pom.utils.JacksonUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -52,7 +53,9 @@ public class MyFirstTestCase extends BaseTest {
         Product product = new Product(1215);
 
         // we'll extract the single user from a config file  ---> then register a new user via API
-        User user = new User("agatha", "Test@1Test");
+        User user = new User(
+                ConfigLoader.getInstance().getUsername(),
+                ConfigLoader.getInstance().getPassword());
 
         // use variables
         String searchTxt = "Blue";
